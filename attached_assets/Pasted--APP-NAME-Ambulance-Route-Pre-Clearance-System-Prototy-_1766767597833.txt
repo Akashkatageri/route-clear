@@ -1,0 +1,142 @@
+________________________________________
+📱 APP NAME
+Ambulance Route Pre-Clearance System
+Prototype Mode – No Login / No Signup
+________________________________________
+🔹 HOME SCREEN
+Screen Title:
+Ambulance Route Pre-Clearance System
+Description Text:
+A smart emergency coordination app to help ambulances reach hospitals faster by sharing live location and route with traffic police.
+Buttons:
+•	🚑 Ambulance Driver
+•	🚦 Traffic Police
+Navigation Logic:
+•	If Ambulance Driver → Open Ambulance Dashboard
+•	If Traffic Police → Open Traffic Police Dashboard
+________________________________________
+🚑 AMBULANCE DRIVER INTERFACE
+🔹 Screen 1: Ambulance Dashboard
+Header:
+Ambulance Driver
+________________________________________
+📍 Current Location Section
+Text:
+Current Location:
+📍 Fetching live GPS location…
+Logic:
+•	Get device GPS
+•	Store as:
+current_lat
+current_lon
+________________________________________
+🏥 Destination Selection Section
+Label:
+Select Destination
+Input Field Placeholder:
+Enter hospital / destination
+API Used (Geoapify Autocomplete):
+https://api.geoapify.com/v1/geocode/autocomplete
+Parameters:
+text = user_input
+apiKey = 931662b2ab65485ca0b3e9e3dbabe064
+On Selection Save:
+destination_name
+dest_lat
+dest_lon
+________________________________________
+🗺️ Get Route Button
+Button Text:
+Get Route
+On Click Logic:
+•	Call Geoapify Routing API
+Routing API:
+https://api.geoapify.com/v1/routing
+Parameters:
+waypoints = current_lat,current_lon | dest_lat,dest_lon
+mode = drive
+apiKey = 931662b2ab65485ca0b3e9e3dbabe064
+________________________________________
+🗺️ Route Preview Section
+Map View Shows:
+•	🚑 Ambulance start location
+•	🏥 Destination hospital
+•	🔵 Route polyline
+Route Details Text:
+ETA: {{estimated_time}} minutes
+Distance: {{distance}} km
+________________________________________
+🚨 Send Emergency Route Button
+Button Text:
+🚨 Send Emergency Route
+On Click Action:
+Send following data to shared database / storage:
+Ambulance ID: TEMP-AMB-01
+Current Latitude
+Current Longitude
+Destination Name
+Destination Latitude
+Destination Longitude
+Route Polyline
+Estimated Time
+Distance
+Status: EMERGENCY ACTIVE
+Success Message:
+Emergency route sent to traffic police successfully.
+________________________________________
+🔴 Emergency Status Banner (Bottom)
+Text (Blinking / Highlighted):
+🚨 EMERGENCY ROUTE ACTIVE
+________________________________________
+🚦 TRAFFIC POLICE INTERFACE
+🔹 Screen 2: Traffic Police Dashboard
+Header:
+Traffic Police
+________________________________________
+🚨 Emergency Alert Section
+Alert Banner (Red):
+🚨 EMERGENCY ALERT: Ambulance Incoming
+________________________________________
+📋 Ambulance Details Card
+Displayed Information:
+Ambulance ID: TEMP-AMB-01
+From: Live Ambulance Location
+To: {{Destination Name}}
+ETA: {{Estimated Time}} minutes
+Status: EMERGENCY ACTIVE
+________________________________________
+📍 Live Ambulance Location
+Text:
+Current Ambulance Location (Live)
+Logic:
+•	Update ambulance GPS location in real-time
+•	Auto refresh every few seconds
+________________________________________
+🗺️ Route View Section
+Map Displays:
+•	🚑 Moving ambulance icon
+•	🔵 Complete route to hospital
+•	🏥 Destination marker
+Map Description Text:
+Live route of ambulance heading towards hospital.
+________________________________________
+ℹ️ Additional Info Section
+Details Shown:
+Distance Remaining: {{remaining_distance}} km
+Estimated Arrival Time: {{ETA}} minutes
+Last Location Update: {{time}}
+________________________________________
+🔔 Awareness Note (Optional Text)
+Text:
+Traffic police can use this information to manually manage junctions and clear the route ahead of ambulance.
+________________________________________
+🔴 Emergency Status Banner (Bottom)
+Text:
+🚨 EMERGENCY ROUTE ACTIVE
+________________________________________
+🔁 DATA FLOW SUMMARY (FOR APP MAKER LOGIC)
+Ambulance GPS → Destination Selected → Route Generated
+→ Route Shared → Police Views Live Location & Route
+→ Faster Coordination → Reduced Delay
+________________________________________
+

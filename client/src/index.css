@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import 'leaflet/dist/leaflet.css';
+@import '@geoapify/geocoder-autocomplete/styles/minimal.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Chakra Petch', sans-serif;
+
+  /* Red/Emergency Theme */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  
+  --primary: 350 89% 60%; /* Emergency Red */
+  --primary-foreground: 0 0% 100%;
+  
+  --secondary: 215 16% 94%;
+  --secondary-foreground: 222 47% 11%;
+  
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  
+  --accent: 350 89% 96%;
+  --accent-foreground: 350 89% 60%;
+  
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+  
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 350 89% 60%;
+  
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: 222 47% 11%;
+  --foreground: 210 40% 98%;
+  
+  --primary: 350 89% 60%;
+  --primary-foreground: 210 40% 98%;
+  
+  --secondary: 217 19% 27%;
+  --secondary-foreground: 210 40% 98%;
+  
+  --muted: 217 19% 27%;
+  --muted-foreground: 215 20% 65%;
+  
+  --accent: 350 89% 20%;
+  --accent-foreground: 350 89% 60%;
+  
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 210 40% 98%;
+  
+  --border: 217 19% 27%;
+  --input: 217 19% 27%;
+  --ring: 350 89% 60%;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .geoapify-autocomplete-input {
+    @apply w-full px-4 py-3 rounded-xl bg-background border-2 border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 !important;
+  }
+  
+  .geoapify-autocomplete-items {
+    @apply bg-background border border-border rounded-lg shadow-xl mt-1 z-50 overflow-hidden !important;
+  }
+  
+  .geoapify-autocomplete-item {
+    @apply px-4 py-2 hover:bg-muted cursor-pointer text-foreground !important;
+  }
+
+  .leaflet-container {
+    @apply rounded-xl border-2 border-border shadow-lg z-0;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .blink-animate {
+    animation: blink 1.5s infinite;
+  }
+  
+  @keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+}
